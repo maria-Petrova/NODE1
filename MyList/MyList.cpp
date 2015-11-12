@@ -1,6 +1,16 @@
 #include "CNode.h"
 #include "MyList.h"
 
+bool myCompare(CNode* pFirst, CNode* pFirst1) {
+	while ((pFirst->next != NULL) && (pFirst1->next != NULL)) {
+		if (pFirst->val != pFirst1->val) 
+			return false;
+		pFirst = pFirst->next;
+		pFirst1 = pFirst1->next;			
+	}
+	return true;
+}
+
 CNode* CreateList(int count, const int* vals) {
   if (count <= 0) return 0;
   CNode *head = new CNode;
