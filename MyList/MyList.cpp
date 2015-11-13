@@ -33,9 +33,11 @@ void merge(CNode** pFirst, CNode* pFirst1, int j, int n) {
 		*pFirst = pFirst1;
 		return;
 	}
+	if (pFirst1 == NULL) 
+		throw std::exception("empty List");
 	CNode *tmp1 = *pFirst;
 	int k = 0;
-	while (tmp1 != NULL) {		      
+	while (tmp1 != NULL) {
 		if (k == j) {
 			CNode* tmp;
 			tmp = tmp1->next;
