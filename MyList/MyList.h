@@ -2,8 +2,7 @@
 #define GTEST_MYLIST_MYLIST_H
 
 #include "CNode.h"
-#include <iostream>
-
+#include <iostream> 
 CNode* CreateList(int count, const int* vals);
 void merge(CNode** pFirst, CNode* pFirst1, int j, int n);
 bool myCompare(CNode* pFirst, CNode* pFirst1);

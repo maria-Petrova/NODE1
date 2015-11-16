@@ -26,15 +26,15 @@ CNode* CreateList(int count, const int* vals) {
   return head;
 }
 
-void merge(CNode** pFirst, CNode* pFirst1, int j, int n) {
-	if ((j < 0) || (j > n))
+void merge(CNode** pFirst, CNode* pFirst1, int j) {
+	if (j < 0)
 		throw std::exception("wrong index");
 	if (*pFirst == NULL) {
 		*pFirst = pFirst1;
 		return;
 	}
 	if (pFirst1 == NULL) 
-		throw std::exception("empty List");
+		return;
 	CNode *tmp1 = *pFirst;
 	int k = 0;
 	while (tmp1 != NULL) {
@@ -46,9 +46,11 @@ void merge(CNode** pFirst, CNode* pFirst1, int j, int n) {
 				pFirst1 = pFirst1->next;
 			}
 			pFirst1->next = tmp;
-			exit;
+			return;
 		} 
 		k++;
 		tmp1 = tmp1->next;
     }
+if (j > k)
+	throw std::exception("wrong index");
 }

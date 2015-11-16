@@ -36,7 +36,7 @@ TEST(testList, mergetest) {
 		vals2[i] = i + 5;
 	CNode *Head1 = CreateList(kListSize2, vals2);
 	int j = 2;
-	ASSERT_NO_THROW(merge(&Head,Head1,j,kListSize2));
+	ASSERT_NO_THROW(merge(&Head,Head1,j));
 }
 
 TEST(testList, mergetest_wrong_index) {
@@ -51,7 +51,7 @@ TEST(testList, mergetest_wrong_index) {
 		vals2[i] = i + 5;
 	CNode *Head1 = CreateList(kListSize2, vals2);
 	int j = 20;
-	ASSERT_ANY_THROW(merge(&Head,Head1,j,kListSize2));
+	ASSERT_ANY_THROW(merge(&Head,Head1,j));
 }
 
 TEST(testList, can_merge) {
@@ -78,7 +78,7 @@ TEST(testList, can_merge) {
 	CNode *Head3 = CreateList(kListSize3, vals3);
 	print(Head3);
 	std::cout<<std::endl;
-	merge(&Head, Head1, j, kListSize1);
+	merge(&Head, Head1, j);
 	print(Head);
 	EXPECT_EQ(true, myCompare(Head, Head3));
 }
@@ -91,7 +91,13 @@ TEST(testList, can_merge_with_emptyList) {
 	CNode *Head = CreateList(kListSize1, vals1);
 	int j = 2;
 	CNode* Head1 = NULL;
-	ASSERT_ANY_THROW(merge(&Head,Head1,j,kListSize1));
+	const int kListSize2 = 5;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i + 1;
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	merge(&Head,Head1,j);
+	EXPECT_EQ(true, myCompare(Head, Head2));
 }
 
 TEST(testList, can_merge_empty_list) {
@@ -111,7 +117,7 @@ TEST(testList, can_merge_empty_list) {
 	CNode *Head3 = CreateList(kListSize3, vals3);
 	print(Head3);
 	std::cout<<std::endl;
-	merge(&Head, Head1, j, kListSize2);
+	merge(&Head, Head1, j);
 	print(Head);
 	EXPECT_EQ(true, myCompare(Head, Head3));
 }
