@@ -23,3 +23,101 @@ TEST(testList, CreateList) {
   }
   EXPECT_EQ(kListSize, k);
 }
+
+TEST(testList, mergetest) {
+	const int kListSize1 = 5;
+	int vals1[kListSize1];
+	for (int i = 0; i < kListSize1; i++)
+		vals1[i] = i + 5;
+	CNode *Head = CreateList(kListSize1, vals1);
+	const int kListSize2 =10;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i + 5;
+	CNode *Head1 = CreateList(kListSize2, vals2);
+	int j = 2;
+	ASSERT_NO_THROW(merge(&Head,Head1,j));
+}
+
+TEST(testList, mergetest_wrong_index) {
+	const int kListSize1 = 5;
+	int vals1[kListSize1];
+	for (int i = 0; i < kListSize1; i++)
+		vals1[i] = i + 5;
+	CNode *Head = CreateList(kListSize1, vals1);
+	const int kListSize2 =10;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i + 5;
+	CNode *Head1 = CreateList(kListSize2, vals2);
+	int j = 20;
+	ASSERT_ANY_THROW(merge(&Head,Head1,j));
+}
+
+TEST(testList, can_merge) {
+	const int kListSize1 = 5;
+	int vals1[kListSize1];
+	for (int i = 0; i < kListSize1; i++)
+		vals1[i] = i + 1;
+	CNode *Head = CreateList(kListSize1, vals1);
+	const int kListSize2 = 10;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i + 10;
+	CNode *Head1 = CreateList(kListSize2, vals2);
+	int j = 2;
+
+	const int kListSize3 = kListSize1 + kListSize2;
+	int vals3[kListSize3];
+	for (int i = 0; i < 3; i++)
+		vals3[i] = i + 1;
+	for (int i = 3; i < 3 + kListSize2; i++)
+		vals3[i] = i + 10 - 3;
+	for (int i = 3 + kListSize2; i < kListSize3; i++)
+		vals3[i] = i + 1 - kListSize2;
+	CNode *Head3 = CreateList(kListSize3, vals3);
+	print(Head3);
+	std::cout<<std::endl;
+	merge(&Head, Head1, j);
+	print(Head);
+	EXPECT_EQ(true, myCompare(Head, Head3));
+}
+
+TEST(testList, can_merge_with_emptyList) {
+	const int kListSize1 = 5;
+	int vals1[kListSize1];
+	for (int i = 0; i < kListSize1; i++)
+		vals1[i] = i + 1;
+	CNode *Head = CreateList(kListSize1, vals1);
+	int j = 2;
+	CNode* Head1 = NULL;
+	const int kListSize2 = 5;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i + 1;
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	merge(&Head,Head1,j);
+	EXPECT_EQ(true, myCompare(Head, Head2));
+}
+
+TEST(testList, can_merge_empty_list) {
+	
+	CNode *Head = NULL;
+	const int kListSize2 = 10;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i + 10;
+	CNode *Head1 = CreateList(kListSize2, vals2);
+	int j = 2;
+
+	const int kListSize3 = kListSize2;
+	int vals3[kListSize3];
+	for (int i = 0; i < kListSize2; i++)
+		vals3[i] = i + 10;
+	CNode *Head3 = CreateList(kListSize3, vals3);
+	print(Head3);
+	std::cout<<std::endl;
+	merge(&Head, Head1, j);
+	print(Head);
+	EXPECT_EQ(true, myCompare(Head, Head3));
+}
