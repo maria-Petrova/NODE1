@@ -1,6 +1,20 @@
 #include "CNode.h"
 #include "MyList.h"
 
+void sort(CNode** pFirst) {	
+	CNode* tmp = (*pFirst)->next;
+	while (tmp->next != NULL) {
+		if (tmp->val > (tmp->next)->val ){
+			CNode* a;
+			a = tmp->next;
+			tmp->next = tmp;
+			tmp = a;
+		}
+		tmp = tmp->next;
+	}
+	}
+}
+
 bool myCompare(CNode* pFirst, CNode* pFirst1) {
 	while ((pFirst->next != NULL) && (pFirst1->next != NULL)) {
 		if (pFirst->val != pFirst1->val) 

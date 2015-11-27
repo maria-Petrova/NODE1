@@ -121,3 +121,23 @@ TEST(testList, can_merge_empty_list) {
 	print(Head);
 	EXPECT_EQ(true, myCompare(Head, Head3));
 }
+
+TEST(testList, sort_List) {
+	const int kListSize1 = 5;
+	int vals1[kListSize1];
+	vals1[0] = 3;
+	vals1[1] = 2;
+	vals1[2] = 4;
+	vals1[3] = 0;
+	vals1[4] = 1;
+	CNode *Head1 = CreateList(kListSize1, vals1);
+	sort(&Head1);
+	print(Head1);
+	const int kListSize2 = 5;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i;
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	print(Head2);
+	EXPECT_EQ(true, myCompare(Head1, Head2));
+}

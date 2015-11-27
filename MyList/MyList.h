@@ -12,4 +12,5 @@ void print (CNode* pFirst) {
         pFirst = pFirst->next;
     }
 }
+void sort(CNode* pFirst);
 #endif  // GTEST_MYLIST_MYLIST_H
