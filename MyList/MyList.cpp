@@ -2,16 +2,45 @@
 #include "MyList.h"
 
 void sort(CNode** pFirst) {	
-	CNode* tmp = (*pFirst)->next;
-	while (tmp->next != NULL) {
-		if (tmp->val > (tmp->next)->val ){
-			CNode* a;
-			a = tmp->next;
-			tmp->next = tmp;
-			tmp = a;
+	if ((*pFirst) == NULL)
+		throw std::exception("can't sort empty list");
+	if ((*pFirst)->next == NULL)
+		return;
+	if ((*pFirst)->next->next == NULL) {
+		if ((*pFirst)->val > (*pFirst)->next->val) {
+			CNode *tmp = (*pFirst)->next;
+			(*pFirst)->next->next = (*pFirst);
+			(*pFirst)->next = NULL;
+			(*pFirst) = tmp;
 		}
-		tmp = tmp->next;
+		return;
 	}
+	CNode *tmp;
+	int f = 0;
+	while (f == 0) {
+		f = 1;
+		tmp = (*pFirst);
+		if (tmp->val > tmp->next->val) {
+			f = 0;
+			CNode *tmp2 = (*pFirst)->next;
+			CNode *tmp3 = (*pFirst)->next->next;
+			(*pFirst)->next->next = (*pFirst);
+			(*pFirst)->next = tmp3;
+			(*pFirst) = tmp2;
+		}
+		while (tmp->next->next != NULL) {
+			if (tmp->next->val > tmp->next->next->val) {
+				CNode *tmp1, *tmp2, *tmp3;
+				f = 0;
+				tmp1 = tmp->next;
+				tmp2 = tmp->next->next;
+				tmp3 = tmp->next->next->next;
+				tmp2->next = tmp1;
+				tmp1->next = tmp3;
+				tmp->next = tmp2;
+			}
+			tmp = tmp->next;
+		}
 	}
 }
 

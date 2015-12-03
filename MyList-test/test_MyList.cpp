@@ -124,12 +124,7 @@ TEST(testList, can_merge_empty_list) {
 
 TEST(testList, sort_List) {
 	const int kListSize1 = 5;
-	int vals1[kListSize1];
-	vals1[0] = 3;
-	vals1[1] = 2;
-	vals1[2] = 4;
-	vals1[3] = 0;
-	vals1[4] = 1;
+	int vals1[kListSize1] = {1, 3, 0, 2, 4};
 	CNode *Head1 = CreateList(kListSize1, vals1);
 	sort(&Head1);
 	print(Head1);
@@ -139,5 +134,66 @@ TEST(testList, sort_List) {
 		vals2[i] = i;
 	CNode *Head2 = CreateList(kListSize2, vals2);
 	print(Head2);
+	EXPECT_EQ(true, myCompare(Head1, Head2));
+}
+
+TEST(testList, sort_empty_List) {
+	CNode *Head1 = NULL;
+	ASSERT_ANY_THROW(sort(&Head1));
+}
+
+TEST(testList, sort_List_of1) {
+	const int kListSize1 = 1;
+	int vals1[kListSize1] = {-1};
+	CNode *Head1 = CreateList(kListSize1, vals1);
+	sort(&Head1);
+	print(Head1);
+	const int kListSize2 = 1;
+	int vals2[kListSize2] = {-1};
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	print(Head2);
+	EXPECT_EQ(true, myCompare(Head1, Head2));
+}
+
+TEST(testList, sort_List_of2) {
+	const int kListSize1 = 2;
+	int vals1[kListSize1] = {5, -1};
+	CNode *Head1 = CreateList(kListSize1, vals1);
+	sort(&Head1);
+	print(Head1);
+	const int kListSize2 = 2;
+	int vals2[kListSize2] = {-1, 5};
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	print(Head2);
+	EXPECT_EQ(true, myCompare(Head1, Head2));
+}
+
+TEST(testList, sort_List_of3) {
+	const int kListSize1 = 3;
+	int vals1[kListSize1] = {0, 5, -1};
+	CNode *Head1 = CreateList(kListSize1, vals1);
+	sort(&Head1);
+	print(Head1);
+	const int kListSize2 = 3;
+	int vals2[kListSize2] = {-1, 0, 5};
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	print(Head2);
+	EXPECT_EQ(true, myCompare(Head1, Head2));
+}
+
+TEST(testList, sort_List_of100) {
+	const int kListSize1 = 100;
+	int vals1[kListSize1];
+	for (int i = 0; i < kListSize1; i++)
+		vals1[i] = 99 - i;
+	CNode *Head1 = CreateList(kListSize1, vals1);
+	sort(&Head1);
+	//print(Head1);
+	const int kListSize2 = 100;
+	int vals2[kListSize2];
+	for (int i = 0; i < kListSize2; i++)
+		vals2[i] = i;
+	CNode *Head2 = CreateList(kListSize2, vals2);
+	//print(Head2);
 	EXPECT_EQ(true, myCompare(Head1, Head2));
 }
