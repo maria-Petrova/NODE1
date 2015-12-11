@@ -97,3 +97,88 @@ void merge(CNode** pFirst, CNode* pFirst1, int j) {
 if (j > k)
 	throw std::exception("wrong index");
 }
+
+
+List::List(int n) {
+  if (n <= 0)
+    throw std::exception("Wrong size");
+  data = new double[n + 2];
+  index = new int[n + 2];
+  current = 0;
+  index[0] = 0;
+  for (int i = 1; i < n + 1; i++)
+    index[i] = i + 1;
+  index[n + 1] = 1;
+}
+
+List::~List() {
+	delete[]data;
+	delete[]index;
+}
+
+void List::Movenext() {
+	current = index[current];
+}
+
+void List::print() {
+	int i = index[0];
+	while (i != 0) {
+		std::cout<<data[i]<<std::endl;
+		i = index[i];
+	}
+}
+
+void List::DelFreeNode(int i) {
+  int tmp = index[i];
+  index[i] = index[tmp];
+  index[tmp] = -1;
+}
+
+void List::AddNewNode(int i, int j) {
+  int tmp = index[i];
+  index[i] = j;
+  index[j] = tmp;
+}
+
+void List::Add(double l) {
+  if (index[1] == 1)
+    throw std::exception("Full List");
+  int tmp = index[1]; 
+  this->DelFreeNode(1);
+  this->AddNewNode(current, tmp);
+  data[tmp] = l;
+}
+
+void List::Del() {
+  if (index[0] == 0)
+    throw std::exception("No elements in list");
+  if (index[current] == 0)
+    this->Movenext();
+  int tmp = index[current]; 
+  this->DelFreeNode(current);
+  this->AddNewNode(1, tmp);
+}
+
+void List::Merge(List list, int j) {
+	if (j < 0)
+		throw std::exception("wrong index");
+	int k = 0;
+	int i = this->index[0];
+	int iL = list.index[0];
+	while (i != NULL) {
+		if (k == j) {
+			int tmp;
+			tmp = this->index[i];
+			this->index[i] = iL;
+			while (iL != NULL) {
+				iL = list.index[iL];
+			}
+			list.index[iL] = tmp;
+			return;
+		} 
+		k++;
+		i = this->index[i];
+    }
+	if (j > k)
+		throw std::exception("wrong index");
+}

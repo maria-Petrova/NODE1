@@ -197,3 +197,24 @@ TEST(testList, sort_List_of100) {
 	//print(Head2);
 	EXPECT_EQ(true, myCompare(Head1, Head2));
 }
+
+TEST(testList, merge_test) {
+	List l(4);
+	l.Add(10);
+	l.Movenext();
+	l.Add(9);
+	l.Movenext();
+	l.Add(2);
+	l.Movenext();
+	l.Add(-3);
+	l.Movenext();
+	l.print();
+	List l1(2);
+	l1.Add(0);
+	l1.Movenext();
+	l1.Add(0);
+	l1.Movenext();
+	l1.print();
+	///l.Merge(l1, 2);
+	//l.print();
+}
