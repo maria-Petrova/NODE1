@@ -12,4 +12,24 @@ void print (CNode* pFirst) {
         pFirst = pFirst->next;
     }
 }
+void sort(CNode* pFirst);
+
+class List {
+private:
+   void DelFreeNode(int i);
+   void AddNewNode(int i, int j);
+public:
+	double *data;
+	int *index;
+	int prev;
+	int current;
+	List(int n);
+	~List();
+	void Movenext();
+	void print();
+	void Add(double l);
+	void Del();
+	void Merge(List list, int j);
+};
+
 #endif  // GTEST_MYLIST_MYLIST_H
